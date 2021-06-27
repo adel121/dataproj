@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block c %}
+<h1 style="font:60px Lobster; text-align: center;"> suppliers </h1>
+<table class="table table-light" style="text-align: center;">
+  <thead class="thead-dark">
+  	   <tr>
+      <th scope="col">PK</th>
+      <th scope="col">name</th>
+      <th scope="col">tel_num</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for supplier in suppliers %}
+<tr>
+      <td><a href="{% url 'supplier' supplier.0 %}">{{supplier.0}}</a></td>
+      <td>{{supplier.1}}</td>
+      <td>{{supplier.2}}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+<form class="form-group" style="text-align: center;" method="post" action="{% url 'suppliers' %}">
+	<input class="form-control" type="text" name="name" placeholder="name"><br>
+	<input class="form-control" type="text" name="tel_num" placeholder="phone num"><br>
+	<input class="btn btn-light" type="submit" value="add supplier"><br>
+	{% csrf_token %}
+</form>
+<hr>
+<h1 style="text-align: center;">Executed Queries</h1>
+{% for query in queries %}
+<p style="text-align: center;">{{query}}</p>
+{% endfor %}
+<hr>
+{% endblock %}

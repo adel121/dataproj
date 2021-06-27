@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block c %}
+
+<h1 style="font:60px Lobster; text-align: center;"> purchases </h1>
+<table class="table table-light" style="text-align: center;">
+  <thead class="thead-dark">
+  	   <tr>
+      <th scope="col">PK</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for purchase in purchases %}
+<tr>
+      <td> <a href="{% url 'purchase' purchase.0 %}"> {{purchase.0}}</a>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+<form class="form-group" style="text-align: center;" method="post" action="{% url 'purchases' %}">
+
+	<input type="number" name="quantity" placeholder="quantity" class="form-control">
+
+	<br>
+
+
+	<select  id="product" name="product" class="form-control" class="form-control">
+		<option selected disabled>Choose product</option>
+		{% for product in products %} 
+			<option value="{{product.0}}">{{product.1}}</option>
+		{% endfor %}
+	</select>
+
+	<br>
+
+
+	<select id="bill" name="bill" class="form-control">
+		<option selected disabled>Choose bill</option>
+		{% for bill in bills %} 
+			<option value="{{bill.0}}">{{bill.1}}</option>
+		{% endfor %}
+	</select>
+<br>
+
+
+	<select id="supplier" name="supplier" class="form-control">
+		<option selected disabled>Choose supplier</option>
+		{% for supplier in suppliers %} 
+			<option value="{{supplier.0}}">{{supplier.1}}</option>
+		{% endfor %}
+	</select>
+<br>
+	<input type="submit" class="btn btn-light" value="add bill">
+	{% csrf_token %}
+</form>
+<hr>
+<h1 style="text-align: center;">Executed Queries</h1>
+{% for query in queries %}
+<p style="text-align: center;">{{query}}</p>
+{% endfor %}
+<hr>
+{% endblock %}
+

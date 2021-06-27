@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block c %}
+<h1 style="font:60px Lobster; text-align: center;"> Deliveries </h1>
+<table class="table table-light" style="text-align: center;">
+  <thead class="thead-dark">
+  	   <tr>
+      <th scope="col">PK</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for delivery in deliveries %}
+<tr>
+      <td> <a href="{% url 'delivery' delivery.0 %}"> {{delivery.0}}</a>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+<form class="form-group" style="text-align: center;" method="post" action="{% url 'deliveries' %}">
+
+	<select id="d_out" name="driver_out" class="form-control">
+		<option selected disabled>Choose Driver Out</option>
+		{% for driver in driver_men %} 
+			<option value="{{driver.0}}">{{driver.1}}</option>
+		{% endfor %}
+	</select>
+
+	<br>
+
+	<select id="d_in" name="driver_in" class="form-control">
+		<option selected disabled>Choose Driver In</option>
+		{% for driver in driver_men %} 
+			<option value="{{driver.0}}">{{driver.1}}</option>
+		{% endfor %}
+	</select>
+
+	<br>
+	<select  id="source" name="location_from" class="form-control">
+		<option selected disabled>Choose Source</option>
+		{% for loc in locations %} 
+			<option value="{{loc.0}}">{{loc.1}} - {{loc.2}} - {{loc.3}} - {{loc.4}} - {{loc.5}}</option>
+		{% endfor %}
+	</select>
+
+	<br>
+
+
+	<select id="dest" name="location_to" class="form-control">
+		<option selected disabled>Choose Destination</option>
+		{% for loc in locations %} 
+			<option value="{{loc.0}}">{{loc.1}} - {{loc.2}} - {{loc.3}} - {{loc.4}} - {{loc.5}}</option>
+		{% endfor %}
+	</select>
+<br>
+<select id="customer" name="customer" class="form-control">
+		<option selected disabled>Choose Customer</option>
+		{% for customer in customers %} 
+			<option value="{{customer.0}}">{{customer.1}} - {{customer.2}}</option>
+		{% endfor %}
+	</select>
+<br>
+	<input type="submit" class="btn btn-light" value="add delivery">
+	{% csrf_token %}
+</form>
+<hr>
+<h1 style="text-align: center;">Executed Queries</h1>
+{% for query in queries %}
+<p style="text-align: center;">{{query}}</p>
+{% endfor %}
+<hr>
+{% endblock %}
+

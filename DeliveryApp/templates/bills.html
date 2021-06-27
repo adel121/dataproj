@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block c %}
+<h1 style="font:60px Lobster; text-align: center;"> bills </h1>
+<table class="table table-light" style="text-align: center;">
+  <thead class="thead-dark">
+  	   <tr>
+      <th scope="col">PK</th>
+       <th scope="col">bill #</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for bill in bills %}
+<tr>
+      <td> <a href="{% url 'bill' bill.0 %}"> {{bill.0}}</a></td>
+   <td>{{bill.1}}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+<form class="form-group" style="text-align: center;" method="post" action="{% url 'bills' %}">
+
+	<input type="number" name="bill_number" placeholder="bill_number" class="form-control">
+
+	<br>
+
+	<input type="number" name="delivery_charge" placeholder="delivery charge" class="form-control">
+
+	<br>
+	<select  id="manager" name="manager" class="form-control" class="form-control">
+		<option selected disabled>Choose manager</option>
+		{% for manager in managers %} 
+			<option value="{{manager.0}}">{{manager.1}}</option>
+		{% endfor %}
+	</select>
+
+	<br>
+
+
+	<select id="delivery" name="delivery" class="form-control">
+		<option selected disabled>Choose Deslivery</option>
+		{% for delivery in deliveries %} 
+			<option value="{{delivery.0}}">{{delivery.0}}</option>
+		{% endfor %}
+	</select>
+<br>
+<input type="date" name="date" placeholder="date" class="form-control">
+
+<br>
+	<input type="submit" class="btn btn-light" value="add bill">
+	{% csrf_token %}
+</form>
+<hr>
+<h1 style="text-align: center;">Executed Queries</h1>
+{% for query in queries %}
+<p style="text-align: center;">{{query}}</p>
+{% endfor %}
+<hr>
+{% endblock %}
+

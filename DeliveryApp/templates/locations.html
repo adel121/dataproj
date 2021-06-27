@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block c %}
+<h1 style="font:60px Lobster; text-align: center;"> locations </h1>
+<table class="table table-light" style="text-align: center;">
+  <thead class="thead-dark">
+  	   <tr>
+      <th scope="col">PK</th>
+      <th scope="col">country</th>
+      <th scope="col">city</th>
+      <th scope="col">street</th>
+      <th scope="col">building</th>
+      <th scope="col">floor</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for location in locations %}
+<tr>
+      <td> <a href="{% url 'location' location.0 %}">{{location.0}}</a></td>
+      <td>{{location.1}}</td>
+      <td>{{location.2}}</td>
+      <td>{{location.3}}</td>
+      <td>{{location.4}}</td>
+      <td>{{location.5}}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+<form class="form-group" style="text-align: center;" method="post" action="{% url 'locations' %}">
+	<input class="form-control" type="text" name="country" placeholder="country"><br>
+	<input class="form-control" type="text" name="city" placeholder="city"><br>
+	<input class="form-control" type="text" name="street" placeholder="street"><br>
+	<input class="form-control" type="text" name="building" placeholder="building"><br>
+	<input class="form-control" type="number" name="floor" placeholder="floor"><br>
+	<input class="btn btn-light" type="submit" value="add location">
+	{% csrf_token %}
+</form>
+<hr>
+<h1 style="text-align: center;">Executed Queries</h1>
+{% for query in queries %}
+<p style="text-align: center;">{{query}}</p>
+{% endfor %}
+<hr>
+{% endblock %}

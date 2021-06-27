@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block c %}
+<style type="text/css">
+  h3 {
+    text-align: center;
+    color: white;
+  }
+</style>
+<h1 style="font:60px Lobster; text-align: center;"> supplier details </h1>
+<h3> PK: {{supplier.0}} </h3>
+<hr>
+<h3> Name: {{supplier.1}} </h3>
+<hr>
+<h3> Tel_num: {{supplier.2}} </h3>
+<hr>
+<h1 style="text-align: center;">Executed Queries</h1>
+{% for query in queries %}
+<p style="text-align: center;">{{query}}</p>
+{% endfor %}
+<hr>
+{% endblock %}

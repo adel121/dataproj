@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block c %}
+<style type="text/css">
+  h3 {
+    text-align: center;
+    color: white;
+  }
+</style>
+
+<h1 style="font:60px Lobster; text-align: center;"> delivery details </h1>
+<h3> PK: {{pk}} </h3>
+<hr>
+<h3> Source: {{location_from_id}} </h3>
+<hr>
+<h3> Destination: {{location_from_id}} </h3>
+<hr>
+<h3> Driver In: {{driver_in_name}} </h3>
+<hr>
+<h3> Driver Out: {{driver_out_name}} </h3>
+<hr>
+<h3> Customer: {{customer_name}} </h3>
+<hr>
+
+
+<hr>
+<h1 style="text-align: center;">Executed Queries</h1>
+{% for query in queries %}
+<p style="text-align: center;">{{query}}</p>
+{% endfor %}
+<hr>
+{% endblock %}

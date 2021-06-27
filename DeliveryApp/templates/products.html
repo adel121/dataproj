@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block c %}
+<h1 style="font:60px Lobster; text-align: center;"> products</h1>
+<table class="table table-light" style="text-align: center;">
+  <thead class="thead-dark">
+  	   <tr>
+      <th scope="col">PK</th>
+      <th scope="col">Category</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col">Unit Mass</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for product in products %}
+
+<tr>
+      <td> <a href="{% url 'product' product.0 %}">{{product.0}}</a></td>
+      <td>{{product.1}}</td>
+      <td>{{product.2}}</td>
+      <td>{{product.3}}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+
+<form class="form-group" style="text-align: center;" method="post" action="{% url 'products' %}">
+	<input class="form-control" type="text" name="category" placeholder="category"><br>
+	
+	<input class="form-control" type="number" name="unit_price" placeholder="unit_price"><br>
+	<input class="form-control" type="number" name="unit_mass" placeholder="unit_mass"><br>
+	<input class="btn btn-light" type="submit" value="add product">
+	{% csrf_token %}
+</form>
+<hr>
+<h1 style="text-align: center;">Executed Queries</h1>
+{% for query in queries %}
+<p style="text-align: center;">{{query}}</p>
+{% endfor %}
+<hr>
+{% endblock %}
